@@ -11,7 +11,7 @@ def puerta_aleatoria():
     puertas[random.randint(0, 2)] = "carro"
     return puertas
 
-# Monty Hall abrir_p a door
+# FUNCION PARA ABRIR PUERTA ALEATORIAMENTE
 
 
 def abrirpuerta(puerta_elegida, puertas):
@@ -32,28 +32,28 @@ def abrirpuerta(puerta_elegida, puertas):
 
 def main():
 
-    num_intentos = 1000000
+    num_intentos = 100000
     aciertos = 0
     sin_carro = 0
 
     for i in range(num_intentos):
-        # Generate the puertas
+        # Generar puertas
         puertas = puerta_aleatoria()
 
-        # Player selects the door
+        # Seleccion de puerta
         puerta_elegidaection = random.randint(0, 2)
 
-        # Monty Hall abrir_ps a door with a burro
+        # Puerta con burro
         puertas = abrirpuerta(puerta_elegidaection, puertas)
 
-        # Player changes of door
+        # Si el jugador cambia la puerta
         if (puerta_elegidaection == puertas.index("carro")):
             puerta_elegidaection = puertas.index("burro")
 
         elif (puerta_elegidaection == puertas.index("burro")):
             puerta_elegidaection = puertas.index("carro")
 
-        # Count of aciertos and sin_carro
+        # Cuenta final con carro y burro
         if puertas[puerta_elegidaection] == "carro":
             aciertos = aciertos + 1
         else:
