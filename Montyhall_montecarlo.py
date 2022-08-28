@@ -1,67 +1,69 @@
-# Monty Hall problem
+# ADALBERTO EMMANUEL ROJAS
+# MAESTRIA EN INGENIERIA EN CIENCIAS COMPUTACIONALES
+# CODIGO PARA PROBLEMA DE MONTY HALL
 import random
 
-# Array with prizes of the doors
+# CREO ARREGLO CON EL CARRO DENTRO DE LAS PUERTAS ALEATORIAMENTE
 
 
-def random_door():
-    doors = ["goat", "goat", "goat"]
-    doors[random.randint(0, 2)] = "prize"
-    return doors
+def puerta_aleatoria():
+    puertas = ["burro", "burro", "burro"]
+    puertas[random.randint(0, 2)] = "carro"
+    return puertas
 
-# Monty Hall open a door
+# Monty Hall abrir_p a door
 
 
-def open_door(player_sel, doors):
-    open = player_sel
-    if (doors[player_sel] == "prize"):
-        open = random.randint(0, 2)
-        while (open == player_sel):
-            open = random.randint(0, 2)
-        doors[open] = "open"
+def abrirpuerta(puerta_elegida, puertas):
+    abrir_p = puerta_elegida
+    if (puertas[puerta_elegida] == "carro"):
+        abrir_p = random.randint(0, 2)
+        while (abrir_p == puerta_elegida):
+            abrir_p = random.randint(0, 2)
+        puertas[abrir_p] = "abrir_p"
     else:
-        index = doors.index("prize")
-        while ((open == player_sel) or (open == index)):
-            open = random.randint(0, 2)
-        doors[open] = "open"
+        index = puertas.index("carro")
+        while ((abrir_p == puerta_elegida) or (abrir_p == index)):
+            abrir_p = random.randint(0, 2)
+        puertas[abrir_p] = "abrir_p"
 
-    return doors
+    return puertas
 
 
 def main():
 
-    attemps = 1000000
-    victories = 0
-    defeats = 0
+    num_intentos = 1000000
+    aciertos = 0
+    sin_carro = 0
 
-    for i in range(attemps):
-        # Generate the doors
-        doors = random_door()
+    for i in range(num_intentos):
+        # Generate the puertas
+        puertas = puerta_aleatoria()
 
         # Player selects the door
-        player_selection = random.randint(0, 2)
+        puerta_elegidaection = random.randint(0, 2)
 
-        # Monty Hall opens a door with a goat
-        doors = open_door(player_selection, doors)
+        # Monty Hall abrir_ps a door with a burro
+        puertas = abrirpuerta(puerta_elegidaection, puertas)
 
         # Player changes of door
-        if (player_selection == doors.index("prize")):
-            player_selection = doors.index("goat")
+        if (puerta_elegidaection == puertas.index("carro")):
+            puerta_elegidaection = puertas.index("burro")
 
-        elif (player_selection == doors.index("goat")):
-            player_selection = doors.index("prize")
+        elif (puerta_elegidaection == puertas.index("burro")):
+            puerta_elegidaection = puertas.index("carro")
 
-        # Count of victories and defeats
-        if doors[player_selection] == "prize":
-            victories = victories + 1
+        # Count of aciertos and sin_carro
+        if puertas[puerta_elegidaection] == "carro":
+            aciertos = aciertos + 1
         else:
-            defeats = defeats + 1
+            sin_carro = sin_carro + 1
 
-    print(f"{attemps} attemps")
-    print(f"You won {victories} times.")
-    print(f"You lost {defeats} times.")
+    print(f"{num_intentos} num_intentos")
+    print(f"Ganaste el carro: {aciertos} veces.")
+    print(f"Tienes un burro: {sin_carro} veces.")
 
-    print("Win percentage: {:.2f}%".format(((victories/attemps)*100)))
+    print("Porcentaje de carro: {:.2f}%".format(((aciertos/num_intentos)*100)))
 
 
 if __name__ == "__main__":
